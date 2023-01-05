@@ -4,20 +4,24 @@ import capitals from './capitals.json';
 
 
 const GEO_URL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
-const REACT_BLUE = "#61DBFB"
-const REACT_BACKGROUND = "#282C34"
+const REACT_BLUE = "#61DBFB", REACT_BACKGROUND = "#282C34"
 
-function App() {
-  const [exploitation, setExploitation] = useState(0.25)
-  const [exploration, setExploration] = useState(0.25)
-
-  const [toursPerformed, setToursPerformed] = useState(0)
-  const [shortestDistance, setShortestTour] = useState(0)
+export default function App() {
+  const [tour, setTour] = useState([])
+  const [exploitation, setExploitation] = useState(0.25), [exploration, setExploration] = useState(0.25)
+  const [toursPerformed, setToursPerformed] = useState(0), [shortestDistance, setShortestTour] = useState(0)
 
   const lines = () => {
+    if (tour.length === 0) return null
+
     let lines = []
-    for (let i = 0; i < capitals.length - 1; i++) lines.push(<Line key={i} from={[capitals[i].longitude, capitals[i].latitude]} to={[capitals[i+1].longitude, capitals[i+1].latitude]} stroke={REACT_BLUE} strokeWidth={2} />)
-    lines.push(<Line key={capitals.length - 1} from={[capitals[capitals.length - 1].longitude, capitals[capitals.length - 1].latitude]} to={[capitals[0].longitude, capitals[0].latitude]} stroke={REACT_BLUE} strokeWidth={2} />)
+    for (let i = 0; i < capitals.length - 1; i++) {
+      const j = tour[i], k = tour[i+1]
+      lines.push(<Line key={i} from={[capitals[j].longitude, capitals[j].latitude]} to={[capitals[k].longitude, capitals[k].latitude]} stroke={REACT_BLUE} strokeWidth={2} />)
+    }
+    const j = tour[capitals.length - 1], k = tour[0]
+    lines.push(<Line key={capitals.length - 1} from={[capitals[j].longitude, capitals[j].latitude]} to={[capitals[k].longitude, capitals[k].latitude]} stroke={REACT_BLUE} strokeWidth={2} />)
+    
     return lines
   }
 
@@ -82,5 +86,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
