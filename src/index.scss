@@ -1,0 +1,122 @@
+body {
+    $react-blue: #61DBFB;
+    $react-background: #282C34;
+
+    background: $react-background;
+    font-family: 'Inter', sans-serif;
+    color: white;
+
+    h1 {
+        margin: .5rem auto;
+        font-size: 2.5rem;
+        font-weight: 300;
+    }
+
+    h3 {
+        margin: .5rem 0;
+        font-size: 1.25rem;
+        font-weight: 300;
+    }
+
+    input {
+        color: white;
+        font-size: 1.25rem;
+        font-weight: 300;
+    }
+
+    input[type="range"] {
+        
+        &::-webkit-slider-runnable-track {
+            height: 1px;
+        }
+
+        &::-webkit-slider-thumb {
+            margin-top: -.5rem;
+        }
+    }
+
+    .App {
+        margin: auto 10%;
+        
+        .App-header {
+            margin: 5vh 12.5% 7.5vh;
+
+            .Bottom-title {
+                text-align: right;
+                color: $react-blue;
+            }
+        }
+
+        .App-main-body {
+            width: 100%;
+            display: flex;
+            
+            .Map {
+                margin-top: -7.5vh;
+                width: 60%;
+            }
+
+            .Side { 
+                margin: 2.5vh 7.5%;
+                width: 25%;
+
+                .Settings {
+
+                    .Exploitation {
+
+                        .Exploitation-slider {
+                            display: flex;
+
+                            .Exploitation-slider-number {
+                                color: $react-blue;
+                            }
+
+                            .Exploitation-slider-input {
+                                margin: auto;
+                                width: 70%;
+                            }
+                        }
+                    }
+
+                    .Exploration {
+                        margin: 7.5vh 0 4vh;
+
+                        .Exploration-slider {
+                            display: flex;
+
+                            .Exploration-slider-number {
+                                color: $react-blue;
+                            }
+
+                            .Exploration-slider-input {
+                                margin: auto;
+                                width: 70%;
+                            }
+                        }
+                    }
+                
+                    .Run {
+                        margin: 0 20%;
+                        border: white solid 1px;
+                        border-radius: 2rem;
+                        width: 45%;
+                        height: 2.25rem;
+                        background: transparent;
+                    }
+                }
+
+                .Description {
+                    margin: 15vh 0 0;
+
+                    .Tours-performed {
+                        color: $react-blue;
+                    }
+
+                    .Distance {
+                        color: $react-blue;
+                    }
+                }
+            }
+        }
+    }
+}
