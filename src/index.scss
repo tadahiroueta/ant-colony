@@ -68,6 +68,7 @@ body {
                             display: flex;
 
                             .Exploitation-slider-number {
+                                width: 3rem;
                                 color: $react-blue;
                             }
 
@@ -85,6 +86,7 @@ body {
                             display: flex;
 
                             .Exploration-slider-number {
+                                width: 3rem;
                                 color: $react-blue;
                             }
 
@@ -96,12 +98,17 @@ body {
                     }
                 
                     .Run {
-                        margin: 0 20%;
+                        margin: 0 25%;
                         border: white solid 1px;
                         border-radius: 2rem;
                         width: 45%;
                         height: 2.25rem;
                         background: transparent;
+
+                        &:active {
+                            border-color: $react-blue;
+                            color: $react-blue;
+                        }
                     }
                 }
 
