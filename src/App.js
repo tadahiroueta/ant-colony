@@ -1,26 +1,26 @@
 import { useState } from 'react';
 import { ComposableMap, Geographies, Geography, Marker, Line } from "react-simple-maps";
-import capitals from './capitals.json';
 
+import capitals from './data/capitals.json';
 
 const GEO_URL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 const REACT_BLUE = "#61DBFB", REACT_BACKGROUND = "#282C34"
 
 export default function App() {
-  const [tour, setTour] = useState([])
+  const [shortestTour, setShortestTour] = useState([]), [lastestTour, setLastestTour] = useState([])
   const [exploitation, setExploitation] = useState(0.25), [exploration, setExploration] = useState(0.25)
-  const [toursPerformed, setToursPerformed] = useState(0), [shortestDistance, setShortestTour] = useState(0)
+  const [toursPerformed, setToursPerformed] = useState(0), [shortestDistance, setShortestDistance] = useState(0)
 
-  const lines = () => {
+  const lines = (tour, stroke, strokeWidth, strokeDasharray) => {
     if (tour.length === 0) return null
 
     let lines = []
     for (let i = 0; i < capitals.length - 1; i++) {
       const j = tour[i], k = tour[i+1]
-      lines.push(<Line key={i} from={[capitals[j].longitude, capitals[j].latitude]} to={[capitals[k].longitude, capitals[k].latitude]} stroke={REACT_BLUE} strokeWidth={2} />)
+      lines.push(<Line key={i} from={[capitals[j].longitude, capitals[j].latitude]} to={[capitals[k].longitude, capitals[k].latitude]} stroke={stroke} strokeWidth={strokeWidth} strokeDasharray={strokeDasharray} />)
     }
     const j = tour[capitals.length - 1], k = tour[0]
-    lines.push(<Line key={capitals.length - 1} from={[capitals[j].longitude, capitals[j].latitude]} to={[capitals[k].longitude, capitals[k].latitude]} stroke={REACT_BLUE} strokeWidth={2} />)
+    lines.push(<Line key={capitals.length - 1} from={[capitals[j].longitude, capitals[j].latitude]} to={[capitals[k].longitude, capitals[k].latitude]} stroke={stroke} strokeWidth={strokeWidth} strokeDasharray={strokeDasharray} />)
     
     return lines
   }
@@ -48,7 +48,8 @@ export default function App() {
             </Marker>
           ))}
           
-          {lines()}
+          {lines(lastestTour, "grey", 1, [5, 5])}
+          {lines(shortestTour, REACT_BLUE, 2)}
 
         </ComposableMap>
         
