@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { ComposableMap, Geographies, Geography, Marker, Line } from "react-simple-maps";
 
 import { performTour, getShortestTour, getShortestDistance, resetGlobals } from './heuristic.js';
@@ -13,6 +14,14 @@ export default function App() {
   const [exploitation, setExploitation] = useState(1), [exploration, setExploration] = useState(2)
   const [capitalInput, setCapitalInput] = useState(20), [numberOfCapitals, setNumberOfCapitals] = useState(20)
   const [toursPerformed, setToursPerformed] = useState(0), [shortestDistance, setShortestDistance] = useState(NaN)
+
+  const description = () => (
+    <h3 className='Description'>
+      <span className='Tours-performed'>{toursPerformed.toLocaleString()}</span> tours performed<br />
+      <br />
+      <span className='Distance'>{shortestDistance.toLocaleString()}</span> km (shortest tour)
+    </h3>  
+  )
 
   const lines = (tour, stroke, strokeWidth, strokeDasharray) => {
     if (tour.length === 0) return null
@@ -70,9 +79,12 @@ export default function App() {
         </ComposableMap>
         
         <div className='Side'>
+
+          {isMobile ? description() : null}
+
           <div className='Settings'>
             
-            <div className='Exploitation'>
+            <div className='Setting'>
               <h3 className='Setting-title'>Exploitation</h3>
               <div className='Setting-slider'>
                 <h3 className='Setting-slider-number'>{exploitation}</h3>
@@ -80,7 +92,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className='Exploration'>
+            <div className='Setting'>
               <h3 className='Setting-title'>Exploration</h3>
               <div className='Setting-slider'>
                 <h3 className='Setting-slider-number'>{exploration}</h3>
@@ -88,7 +100,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className='Capitals'>
+            <div className='Setting'>
               <h3 className='Setting-title'>Capitals</h3>
               <div className='Setting-slider'>
                 <h3 className='Setting-slider-number'>{capitalInput}</h3>
@@ -100,11 +112,7 @@ export default function App() {
             
           </div>
 
-          <h3 className='Description'>
-            <span className='Tours-performed'>{toursPerformed.toLocaleString()}</span> tours performed<br />
-            <br />
-            <span className='Distance'>{shortestDistance.toLocaleString()}</span> km (shortest tour)
-          </h3>  
+          {isMobile ? null : description()}
 
         </div>
       </div>

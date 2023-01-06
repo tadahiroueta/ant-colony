@@ -112,3 +112,57 @@ body {
         }
     }
 }
+
+@media only screen and (max-width: 600px) {
+    body {
+        h1 {
+            font-size: 1.75rem;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            margin: .35rem auto;
+        }
+        
+        .App {
+            margin: auto 5%;
+
+            .App-header {
+                margin: 10vh 5%;
+            }
+
+            .App-main-body {
+                flex-direction: column;
+
+                .Map {
+                    width: 100%;
+                }
+
+                .Side {
+                    margin: 2.5vh 5%;
+                    width: 90%;
+
+                    .Description {
+                        margin: 0 0 10vh;
+                    }
+
+                    .Settings {
+
+                        .Setting {
+                            margin: .5rem 0;
+                        }
+
+                        .Reset {
+                            margin: 5vh 25% 0;
+                            width: 45%;
+                        }
+                    }
+                }
+            }
+
+            .Contact-info {
+                text-align: center;
+            }
+        }
+    }
+}
