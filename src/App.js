@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { ComposableMap, Geographies, Geography, Marker, Line } from "react-simple-maps";
 
-import { performTour, getShortestTour, getShortestDistance, resetGlobals } from './heuristic.js';
+import { resetGlobals, performTour, getShortestTour, getShortestDistance } from './heuristic.js';
 import capitals from './data/capitals.json';
 
 const GEO_URL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";

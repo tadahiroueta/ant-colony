@@ -65,4 +65,4 @@ const performTour = () => {
 const getShortestTour = () => shortestTour
 const getShortestDistance = () => shortestDistance
 
-module.exports = { performTour, getShortestTour, getShortestDistance, resetGlobals }
+module.exports = { resetGlobals, performTour, getShortestTour, getShortestDistance }
