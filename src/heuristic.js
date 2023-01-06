@@ -2,15 +2,20 @@ const distances = require('./data/distances.json');
 
 const startingCity = 40 // Austin, TX
 
-let pheromones, shortestTour, shortestDistance = Infinity
+let pheromones, shortestTour, shortestDistance, exploitation, exploration
 
-const resetPheromones = () => pheromones = Array(48).fill().map(() => Array(48).fill(1))
+const resetGlobals = (exploi, explor) => {
+    pheromones = Array(48).fill().map(() => Array(48).fill(1))
+    shortestDistance = Infinity
+    exploitation = exploi
+    exploration = explor
+}
 
-const probabilityNumerator = (from, to, exploitation, exploration) => distances[from][to] ** -exploitation * pheromones[from][to] ** exploration;
+const probabilityNumerator = (from, to) => distances[from][to] ** -exploitation * pheromones[from][to] ** exploration
 
-const probabilityDenominator = (from, adjacents, exploitation, exploration) => {
+const probabilityDenominator = (from, adjacents) => {
     let sum = 0
-    for (let i = 0; i < adjacents; i++) {
+    for (let i = 0; i < adjacents.length; i++) {
         const to = adjacents[i]
         sum += distances[from][to] ** -exploitation * pheromones[from][to] ** exploration
     }
@@ -22,7 +27,7 @@ const probability = (numerator, denominator) => numerator / denominator
 const tourDistance = (tour) => tour.reduce((sum, city, i) => sum + distances[city][tour[(i + 1) % 48]], 0)
 
 const updatePheromones = (tour, distance) => {
-    reciprocal = 1 / distance
+    const reciprocal = 1 / distance
     tour.forEach((city, i) => {
         pheromones[city][tour[(i + 1) % 48]] += reciprocal
         pheromones[tour[(i + 1) % 48]][city] += reciprocal
@@ -36,26 +41,29 @@ const pick = (probabilities) => {
     }
 }
 
-const tour = (exploitation, exploration) => {
+const performTour = () => {
     let from = startingCity, tour = [ startingCity ]
-    let adjacents = [ ...Array(48).keys() ].splice(startingCity)
+    let adjacents = [ ...Array(48).keys() ]
+    adjacents.splice(startingCity, 1)
     
     while (adjacents.length > 0) {
-        const denominator = probabilityDenominator(from, adjacents, exploitation, exploration)
-        const probabilities = adjacents.map((to) => probability(probabilityNumerator(from, to, exploitation, exploration), denominator))
+        const denominator = probabilityDenominator(from, adjacents)
+        const probabilities = adjacents.map((to) => probability(probabilityNumerator(from, to), denominator))
 
-        const pick = pick(probabilities)
-        from = adjacents[pick]
+        const picked = pick(probabilities)
+        from = adjacents[picked]
         tour.push(from)
-        adjacents.splice(pick)
-
-        const distance = tourDistance(tour)
-        updatePheromones(tour)
-
-        if (distance < shortestDistance) {
-            shortestDistance = distance
-            shortestTour = tour
-        }
+        adjacents.splice(picked, 1)
     }
-    return tour
-}
+    const distance = tourDistance(tour)
+    updatePheromones(tour, distance)
+
+    if (distance < shortestDistance) {
+        shortestDistance = distance
+        shortestTour = tour
+}}
+
+const getShortestTour = () => shortestTour
+const getShortestDistance = () => shortestDistance
+
+module.exports = { performTour, getShortestTour, getShortestDistance, resetGlobals }
