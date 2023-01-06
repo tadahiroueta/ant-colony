@@ -11,7 +11,7 @@ const TOURS_BEFORE_RENDER = 2048
 export default function App() {
   const [shortestTour, setShortestTour] = useState([])
   const [exploitation, setExploitation] = useState(1), [exploration, setExploration] = useState(2)
-  const [capitalInput, setCapitalInput] = useState(48), [numberOfCapitals, setNumberOfCapitals] = useState(48)
+  const [capitalInput, setCapitalInput] = useState(20), [numberOfCapitals, setNumberOfCapitals] = useState(20)
   const [toursPerformed, setToursPerformed] = useState(0), [shortestDistance, setShortestDistance] = useState(NaN)
 
   const lines = (tour, stroke, strokeWidth, strokeDasharray) => {
@@ -33,7 +33,7 @@ export default function App() {
     setToursPerformed(0)
   }
 
-  useEffect(() => { resetGlobals(1, 1, 48) }, [])
+  useEffect(() => { resetGlobals(exploitation, exploration, capitalInput) }, [])
 
   useEffect(() => {
     for (let i = 0; i < TOURS_BEFORE_RENDER; i++) performTour()
@@ -59,7 +59,7 @@ export default function App() {
             {({ geographies }) => geographies.map((geo) => geo.id !== '02' && geo.id !== '15' ? <Geography key={geo.rsmKey} geography={geo} stroke="white" strokeWidth={4} fill='white' /> : null)}
           </Geographies>
 
-          {capitals.map(({ latitude, longitude }) => (
+          {capitals.slice(0, numberOfCapitals).map(({ latitude, longitude }) => (
             <Marker key={latitude} coordinates={[longitude, latitude]} fill={REACT_BACKGROUND}>
               <circle r={4} />
             </Marker>
@@ -108,6 +108,10 @@ export default function App() {
 
         </div>
       </div>
+
+      <footer>
+        <h4 className='Contact-info'>By Tadahiro Ueta&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;tadahiroueta@gmail.com</h4>
+      </footer>
     </div>
   );
 }
