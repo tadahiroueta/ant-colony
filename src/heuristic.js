@@ -2,7 +2,7 @@ const distances = require('./data/distances.json');
 
 let pheromones, shortestTour, shortestDistance, exploitation, exploration, capitals
 
-const resetGlobals = (exploi, explor, numberOfCapitals) => {
+export const resetGlobals = (exploi, explor, numberOfCapitals) => {
     exploitation = exploi
     exploration = explor
     capitals = parseFloat(numberOfCapitals)
@@ -40,7 +40,7 @@ const pick = (probabilities) => {
     }
 }
 
-const performTour = () => {
+export const performTour = () => {
     let from = 0, tour = [ 0 ]
     let adjacents = [ ...Array(capitals).keys() ].splice(1)
     
@@ -62,7 +62,5 @@ const performTour = () => {
         shortestTour = tour
 }}
 
-const getShortestTour = () => shortestTour
-const getShortestDistance = () => shortestDistance
-
-module.exports = { resetGlobals, performTour, getShortestTour, getShortestDistance }
+export const getShortestTour = () => shortestTour
+export const getShortestDistance = () => shortestDistance
