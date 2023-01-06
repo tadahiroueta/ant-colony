@@ -10,28 +10,30 @@ const TOURS_BEFORE_RENDER = 2048
 
 export default function App() {
   const [shortestTour, setShortestTour] = useState([])
-  const [exploitation, setExploitation] = useState(.9), [exploration, setExploration] = useState(1.5)
+  const [exploitation, setExploitation] = useState(1), [exploration, setExploration] = useState(2)
+  const [capitalInput, setCapitalInput] = useState(48), [numberOfCapitals, setNumberOfCapitals] = useState(48)
   const [toursPerformed, setToursPerformed] = useState(0), [shortestDistance, setShortestDistance] = useState(NaN)
 
   const lines = (tour, stroke, strokeWidth, strokeDasharray) => {
     if (tour.length === 0) return null
 
     let lines = []
-    for (let i = 0; i < capitals.length; i++) {
-      const j = tour[i], k = tour[(i + 1) % capitals.length]
+    for (let i = 0; i < numberOfCapitals; i++) {
+      const j = tour[i], k = tour[(i + 1) % numberOfCapitals]
       lines.push(<Line key={i} from={[capitals[j].longitude, capitals[j].latitude]} to={[capitals[k].longitude, capitals[k].latitude]} stroke={stroke} strokeWidth={strokeWidth} strokeDasharray={strokeDasharray} />)
     }    
     return lines
   }
 
   const handleReset = () => {
-    resetGlobals(exploitation, exploration)
+    setNumberOfCapitals(capitalInput)
+    resetGlobals(exploitation, exploration, capitalInput)
     setShortestTour([])
     setShortestDistance(NaN)
     setToursPerformed(0)
   }
 
-  useEffect(() => { resetGlobals(1, 1) }, [])
+  useEffect(() => { resetGlobals(1, 1, 48) }, [])
 
   useEffect(() => {
     for (let i = 0; i < TOURS_BEFORE_RENDER; i++) performTour()
@@ -71,18 +73,26 @@ export default function App() {
           <div className='Settings'>
             
             <div className='Exploitation'>
-              <h3 className='Exploitation-title'>Exploitation</h3>
-              <div className='Exploitation-slider'>
-                <h3 className='Exploitation-slider-number'>{exploitation}</h3>
-                <input type='range' min='0' max='200' value={exploitation * 100} className='Exploitation-slider-input' onChange={(e) => setExploitation(e.target.value / 100)} />
+              <h3 className='Setting-title'>Exploitation</h3>
+              <div className='Setting-slider'>
+                <h3 className='Setting-slider-number'>{exploitation}</h3>
+                <input type='range' min='0' max='200' value={exploitation * 100} className='Setting-slider-input' onChange={(e) => setExploitation(e.target.value / 100)} />
               </div>
             </div>
 
             <div className='Exploration'>
-              <h3 className='Exploration-title'>Exploration</h3>
-              <div className='Exploration-slider'>
-                <h3 className='Exploration-slider-number'>{exploration}</h3>
-                <input type='range' min='0' max='200' value={exploration * 100} className='Exploration-slider-input' onChange={(e) => setExploration(e.target.value / 100)} />
+              <h3 className='Setting-title'>Exploration</h3>
+              <div className='Setting-slider'>
+                <h3 className='Setting-slider-number'>{exploration}</h3>
+                <input type='range' min='0' max='200' value={exploration * 100} className='Setting-slider-input' onChange={(e) => setExploration(e.target.value / 100)} />
+              </div>
+            </div>
+
+            <div className='Capitals'>
+              <h3 className='Setting-title'>Capitals</h3>
+              <div className='Setting-slider'>
+                <h3 className='Setting-slider-number'>{capitalInput}</h3>
+                <input type='range' min='1' max='48' value={capitalInput} className='Setting-slider-input' onChange={(e) => setCapitalInput(e.target.value)} />
               </div>
             </div>
 

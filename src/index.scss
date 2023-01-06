@@ -62,43 +62,22 @@ body {
 
                 .Settings {
 
-                    .Exploitation {
+                    .Setting-slider {
+                        display: flex;
 
-                        .Exploitation-slider {
-                            display: flex;
+                        .Setting-slider-number {
+                            width: 3rem;
+                            color: $react-blue;
+                        }
 
-                            .Exploitation-slider-number {
-                                width: 3rem;
-                                color: $react-blue;
-                            }
-
-                            .Exploitation-slider-input {
-                                margin: auto;
-                                width: 70%;
-                            }
+                        .Setting-slider-input {
+                            margin: auto;
+                            width: 70%;
                         }
                     }
 
-                    .Exploration {
-                        margin: 7.5vh 0 4vh;
-
-                        .Exploration-slider {
-                            display: flex;
-
-                            .Exploration-slider-number {
-                                width: 3rem;
-                                color: $react-blue;
-                            }
-
-                            .Exploration-slider-input {
-                                margin: auto;
-                                width: 70%;
-                            }
-                        }
-                    }
-                
                     .Reset {
-                        margin: 0 25%;
+                        margin: 5vh 25% 0;
                         border: white solid 1px;
                         border-radius: 2rem;
                         width: 45%;
@@ -113,7 +92,7 @@ body {
                 }
 
                 .Description {
-                    margin: 15vh 0 0;
+                    margin: 10vh 0 0;
                     text-align: right;
 
                     .Tours-performed {

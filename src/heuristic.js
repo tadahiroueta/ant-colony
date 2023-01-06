@@ -1,14 +1,13 @@
 const distances = require('./data/distances.json');
 
-const startingCity = 40 // Austin, TX
+let pheromones, shortestTour, shortestDistance, exploitation, exploration, capitals
 
-let pheromones, shortestTour, shortestDistance, exploitation, exploration
-
-const resetGlobals = (exploi, explor) => {
-    pheromones = Array(48).fill().map(() => Array(48).fill(1))
-    shortestDistance = Infinity
+const resetGlobals = (exploi, explor, numberOfCapitals) => {
     exploitation = exploi
     exploration = explor
+    capitals = parseFloat(numberOfCapitals)
+    pheromones = Array(capitals).fill().map(() => Array(capitals).fill(1))
+    shortestDistance = Infinity
 }
 
 const probabilityNumerator = (from, to) => distances[from][to] ** -exploitation * pheromones[from][to] ** exploration
@@ -24,13 +23,13 @@ const probabilityDenominator = (from, adjacents) => {
 
 const probability = (numerator, denominator) => numerator / denominator
 
-const tourDistance = (tour) => tour.reduce((sum, city, i) => sum + distances[city][tour[(i + 1) % 48]], 0)
+const tourDistance = (tour) => tour.reduce((sum, city, i) => sum + distances[city][tour[(i + 1) % capitals]], 0)
 
 const updatePheromones = (tour, distance) => {
     const reciprocal = 1 / distance
     tour.forEach((city, i) => {
-        pheromones[city][tour[(i + 1) % 48]] += reciprocal
-        pheromones[tour[(i + 1) % 48]][city] += reciprocal
+        pheromones[city][tour[(i + 1) % capitals]] += reciprocal
+        pheromones[tour[(i + 1) % capitals]][city] += reciprocal
 })}
 
 const pick = (probabilities) => {
@@ -42,9 +41,8 @@ const pick = (probabilities) => {
 }
 
 const performTour = () => {
-    let from = startingCity, tour = [ startingCity ]
-    let adjacents = [ ...Array(48).keys() ]
-    adjacents.splice(startingCity, 1) // O(n)
+    let from = 0, tour = [ 0 ]
+    let adjacents = [ ...Array(capitals).keys() ].splice(1)
     
     while (adjacents.length > 0) { // O(n)
         const denominator = probabilityDenominator(from, adjacents) // O(n)
@@ -56,6 +54,7 @@ const performTour = () => {
         adjacents.splice(picked, 1) // O(n)
     }
     const distance = tourDistance(tour) // O(n)
+    if (capitals === 10) console.log(tour)
     updatePheromones(tour, distance) // O(n)
 
     if (distance < shortestDistance) {
