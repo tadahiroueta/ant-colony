@@ -10,9 +10,8 @@ const TOURS_BEFORE_RENDER = 2048
 
 export default function App() {
   const [shortestTour, setShortestTour] = useState([])
-  const [exploitation, setExploitation] = useState(1), [exploration, setExploration] = useState(1)
+  const [exploitation, setExploitation] = useState(.9), [exploration, setExploration] = useState(1.5)
   const [toursPerformed, setToursPerformed] = useState(0), [shortestDistance, setShortestDistance] = useState(NaN)
-  const [startingTime, setStartingTime] = useState()
 
   const lines = (tour, stroke, strokeWidth, strokeDasharray) => {
     if (tour.length === 0) return null
@@ -32,14 +31,9 @@ export default function App() {
     setToursPerformed(0)
   }
 
-  useEffect(() => { 
-    resetGlobals(1, 1)
-    setStartingTime(Date.now())
-   }, [])
+  useEffect(() => { resetGlobals(1, 1) }, [])
 
   useEffect(() => {
-    if (toursPerformed >= 100000) alert(`Finished in ${(Date.now() - startingTime) / 1000} seconds!`)
-
     for (let i = 0; i < TOURS_BEFORE_RENDER; i++) performTour()
 
     setShortestTour(getShortestTour())
@@ -57,7 +51,6 @@ export default function App() {
 
       <div className='App-main-body'>
       
-        {/* <img src={process.env.PUBLIC_URL + '/map-placeholder.png'} alt='Map' className='Map' /> */}
         <ComposableMap className='Map' projection="geoAlbersUsa">
           
           <Geographies geography={GEO_URL}>

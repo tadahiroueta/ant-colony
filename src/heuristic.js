@@ -44,19 +44,19 @@ const pick = (probabilities) => {
 const performTour = () => {
     let from = startingCity, tour = [ startingCity ]
     let adjacents = [ ...Array(48).keys() ]
-    adjacents.splice(startingCity, 1)
+    adjacents.splice(startingCity, 1) // O(n)
     
-    while (adjacents.length > 0) {
-        const denominator = probabilityDenominator(from, adjacents)
-        const probabilities = adjacents.map((to) => probability(probabilityNumerator(from, to), denominator))
+    while (adjacents.length > 0) { // O(n)
+        const denominator = probabilityDenominator(from, adjacents) // O(n)
+        const probabilities = adjacents.map((to) => probability(probabilityNumerator(from, to), denominator)) // O(n)
 
-        const picked = pick(probabilities)
+        const picked = pick(probabilities) // O(n)
         from = adjacents[picked]
         tour.push(from)
-        adjacents.splice(picked, 1)
+        adjacents.splice(picked, 1) // O(n)
     }
-    const distance = tourDistance(tour)
-    updatePheromones(tour, distance)
+    const distance = tourDistance(tour) // O(n)
+    updatePheromones(tour, distance) // O(n)
 
     if (distance < shortestDistance) {
         shortestDistance = distance
