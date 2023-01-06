@@ -46,7 +46,11 @@ export const performTour = () => {
     
     while (adjacents.length > 0) { // O(n)
         const denominator = probabilityDenominator(from, adjacents) // O(n)
-        const probabilities = adjacents.map((to) => probability(probabilityNumerator(from, to), denominator)) // O(n)
+        let probabilities = []
+        for (let i = 0; i < adjacents.length; i++) { // O(n)
+            const to = adjacents[i]
+            probabilities.push(probability(probabilityNumerator(from, to), denominator))
+        }
 
         const picked = pick(probabilities) // O(n)
         from = adjacents[picked]

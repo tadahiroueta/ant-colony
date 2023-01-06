@@ -42,7 +42,7 @@ export default function App() {
     setToursPerformed(0)
   }
 
-  useEffect(() => { resetGlobals(exploitation, exploration, capitalInput) }, [])
+  useEffect(() => { resetGlobals(1, 2, 20) }, [])
 
   useEffect(() => {
     for (let i = 0; i < TOURS_BEFORE_RENDER; i++) performTour()
