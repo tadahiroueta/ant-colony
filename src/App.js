@@ -57,7 +57,7 @@ export default function App() {
       
       <header className="App-header">
         <h1 className="Top-title">Travelling Salesperson Problem: </h1>
-        <h1 className="Bottom-title">Pheromone Heuristic</h1>
+        <h1 className="Bottom-title">Ant Colony Heuristic</h1>
       </header>
 
       <div className='App-main-body'>
