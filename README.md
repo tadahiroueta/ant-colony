@@ -1,3 +1,3 @@
-Pheromones heuristic solution for Salesperson Problem.
+Ant Colony heuristic solution for Salesperson Problem.
 
-https://pheromones.tadahiroueta.com/
+https://antcolony.tadahiroueta.com/
