@@ -42,6 +42,12 @@
 
   ![map](https://github.com/tadahiroueta/ant-colony/blob/master/samples/US-map.png)
 
+- Designed on Figma
+  - Static, non-functioning prototype first designed on [Figma](https://www.figma.com/design/pJbll9lW158O6awgEYFQ62/Pheromones?node-id=9-13&t=xYOqYDW3K2Pyg2fd-1)
+  
+  ![figma design](https://github.com/tadahiroueta/ant-colony/blob/master/samples/figma-design.png)
+
+
 ## Usage
 1. Visit my [webpage](https://antcolony.tadahiroueta.com/)
 
