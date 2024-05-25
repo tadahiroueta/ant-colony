@@ -43,6 +43,9 @@
 
 ## Usage
 1. Visit my [webpage](https://antcolony.tadahiroueta.com/)
+
+    ![30-points](https://github.com/tadahiroueta/ant-colony/blob/master/samples/30-capitals-iteration.gif)
+
 2. Adjust sliders to your preferences
     > I find 1:2 exploitation:exploration to be most effective
     >
