@@ -14,12 +14,13 @@
 - ![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
 
 ## Features
-![website](/samples/20-capitals-iteration.gif)
+![website](https://github.com/tadahiroueta/ant-colony/blob/master/samples/20-capitals-iteration.gif)
 - Sub-optimal algorithm inspired by the hive mind of ant colonies
   - The algorithm simulates the route of ants walking randomly with two biasses:
     1. Exploitation - a tendency to go to nearby cities
     2. Exploration - following "pheromone trails" left by older ants
         > When ants find a short path, they leave stronger pheromones to encourage others to follow a similar path.
+    
     $$P(u,v) = \frac{ D(u,v) ^{ -\alpha } \cdot R(u,v) ^\beta }{\displaystyle\sum_{ j \in adj(u) } D(u,j) ^{ -\alpha } \cdot R(u,j) ^\beta }$$
     > Probability of going from point $u$ to point $v$
     > - $\alpha$ being the coefficient of "exploitation"
@@ -30,15 +31,15 @@
 - User inputs for bias coefficients
   - React hooks save user preferences
   
-  ![inputs](/samples/inputs.gif)
+  ![inputs](https://github.com/tadahiroueta/ant-colony/blob/master/samples/inputs.gif)
 - Stats on running simulation
   - React hooks display real-time information about simulation as it runs
 
-  ![stats](/samples/stats.png)
+  ![stats](https://github.com/tadahiroueta/ant-colony/blob/master/samples/stats.png)
 - Map of mainland USA
   - Implementation of [React Simple Maps](https://www.react-simple-maps.io/) using state capital coordinates
 
-  ![map](/samples/US-map.png)
+  ![map](https://github.com/tadahiroueta/ant-colony/blob/master/samples/US-map.png)
 
 ## Usage
 1. Visit my [webpage](https://antcolony.tadahiroueta.com/)
