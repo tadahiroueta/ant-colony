@@ -20,6 +20,7 @@
     1. Exploitation - a tendency to go to nearby cities
     2. Exploration - following "pheromone trails" left by older ants
         > When ants find a short path, they leave stronger pheromones to encourage others to follow a similar path.
+    
     $$P(u,v) = \frac{ D(u,v) ^{ -\alpha } \cdot R(u,v) ^\beta }{\displaystyle\sum_{ j \in adj(u) } D(u,j) ^{ -\alpha } \cdot R(u,j) ^\beta }$$
     > Probability of going from point $u$ to point $v$
     > - $\alpha$ being the coefficient of "exploitation"
