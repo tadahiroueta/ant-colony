@@ -16,36 +16,40 @@
 
 ## Features
 ![website](https://github.com/tadahiroueta/ant-colony/blob/master/samples/20-capitals-iteration.gif)
-- Sub-optimal algorithm inspired by the hive mind of ant colonies
-  - The algorithm simulates the route of ants walking randomly with two biasses:
-    1. Exploitation - a tendency to go to nearby cities
-    2. Exploration - following "pheromone trails" left by older ants
-        > When ants find a short path, they leave stronger pheromones to encourage others to follow a similar path.
-    
-    $$P(u,v) = \frac{ D(u,v) ^{ -\alpha } \cdot R(u,v) ^\beta }{\displaystyle\sum_{ j \in adj(u) } D(u,j) ^{ -\alpha } \cdot R(u,j) ^\beta }$$
-    > Probability of going from point $u$ to point $v$
-    > - $\alpha$ being the coefficient of "exploitation"
-    > - $\beta$ being the coefficient of "exploration"
-    > - $D(u,v)$ being the distance between point $u$ and $v$ (calculated with straight coordinates)
-    > - $R(u,v)$ being the pheromone trail left between point $u$ and $v$
-    > - $adj(u)$ being any point that is not $u$
-- User inputs for bias coefficients
-  - React hooks save user preferences
+
+### Sub-optimal algorithm inspired by the hive mind of ant colonies
+The algorithm simulates the route of ants walking randomly with two biasses:
+  1. Exploitation - a tendency to go to nearby cities
+  2. Exploration - following "pheromone trails" left by older ants
+      > When ants find a short path, they leave stronger pheromones to encourage others to follow a similar path.
   
-  ![inputs](https://github.com/tadahiroueta/ant-colony/blob/master/samples/inputs.gif)
-- Stats on running simulation
-  - React hooks display real-time information about simulation as it runs
+  $$P(u,v) = \frac{ D(u,v) ^{ -\alpha } \cdot R(u,v) ^\beta }{\displaystyle\sum_{ j \in adj(u) } D(u,j) ^{ -\alpha } \cdot R(u,j) ^\beta }$$
+  > Probability of going from point $u$ to point $v$
+  > - $\alpha$ being the coefficient of "exploitation"
+  > - $\beta$ being the coefficient of "exploration"
+  > - $D(u,v)$ being the distance between point $u$ and $v$ (calculated with straight coordinates)
+  > - $R(u,v)$ being the pheromone trail left between point $u$ and $v$
+  > - $adj(u)$ being any point that is not $u$
 
-  ![stats](https://github.com/tadahiroueta/ant-colony/blob/master/samples/stats.png)
-- Map of mainland USA
-  - Implementation of [React Simple Maps](https://www.react-simple-maps.io/) using state capital coordinates
-
-  ![map](https://github.com/tadahiroueta/ant-colony/blob/master/samples/US-map.png)
-
-- Designed on Figma
-  - Static, non-functioning prototype first designed on [Figma](https://www.figma.com/design/pJbll9lW158O6awgEYFQ62/Pheromones?node-id=9-13&t=xYOqYDW3K2Pyg2fd-1)
+### User inputs for bias coefficients
+React hooks save user preferences
   
-  ![figma design](https://github.com/tadahiroueta/ant-colony/blob/master/samples/figma-design.png)
+![inputs](https://github.com/tadahiroueta/ant-colony/blob/master/samples/inputs.gif)
+
+### Stats on running simulation
+React hooks display real-time information about simulation as it runs
+
+![stats](https://github.com/tadahiroueta/ant-colony/blob/master/samples/stats.png)
+
+### Map of mainland USA
+Implementation of [React Simple Maps](https://www.react-simple-maps.io/) using state capital coordinates
+
+![map](https://github.com/tadahiroueta/ant-colony/blob/master/samples/US-map.png)
+
+### Designed on Figma
+Static, non-functioning prototype first designed on [Figma](https://www.figma.com/design/pJbll9lW158O6awgEYFQ62/Pheromones?node-id=9-13&t=xYOqYDW3K2Pyg2fd-1)
+  
+![figma design](https://github.com/tadahiroueta/ant-colony/blob/master/samples/figma-design.png)
 
 
 ## Usage
